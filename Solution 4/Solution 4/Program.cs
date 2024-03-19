@@ -12,16 +12,7 @@ public class Con
     private static int num = 0;
     private int max_load { get; set; }
 
-    public Con(int weight, int height, int cargoWeight, int deep, int max_load)
-    {
-        this.weight = weight;
-        this.height = height;
-        this.cargo_weight = cargoWeight;
-        this.deep = deep;
-        num++;
-        serial = "KON-" + "C-" + num.ToString(); 
-        this.max_load = max_load;
-    }
+    
 
     
 }
