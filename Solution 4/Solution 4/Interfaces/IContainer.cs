@@ -1,10 +1,7 @@
-﻿using Solution_4.Exceptions;
-
-namespace Solution_4;
+﻿namespace Solution_4.Interfaces;
 
 public interface IContainer
 {
     void Unload();
-
     void Load(double cargoWeight);
 }
