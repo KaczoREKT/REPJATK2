@@ -8,6 +8,12 @@ namespace Solution_4.Ship;
 public class Ship
 {
     public List<Container> containerList = new List<Container>();
+    public static int num = 0;
+
+    public Ship()
+    {
+        num++;
+    }
 
     public static GasContainer CreateGasContainer(int weight, int height, double cargoWeight, int deep, double maxLoad)
     {
@@ -46,11 +52,13 @@ public class Ship
     public void LoadShip(Container container)
     {
         containerList.Add(container);
+        Console.WriteLine("LOADED SHIP WITH CARGO: " + container.serial);
     }
 
     public void LoadShipWithList(List<Container> containers)
     {
         containers.AddRange(containers);
+        Console.WriteLine("LOADED SHIP WITH GIVEN LIST.");
     }
 
     public void DeleteContainer(Container container)
@@ -61,11 +69,13 @@ public class Ship
         }
 
         containerList.Remove(container);
+        Console.WriteLine("DELETED CONTAINER.");
     }
 
     public void Unload()
     {
         containerList = new List<Container>();
+        Console.WriteLine("UNLOADED SHIP.");
     }
 
     public void Replace(String serial1, Container newContainer)
@@ -79,6 +89,7 @@ public class Ship
                 break;
             }
         }
+        Console.WriteLine("REPLACED WITH NEW CONTAINER.");
     }
 
     public void swapCargo(Ship ship1, Ship ship2, string serial1, string serial2)
@@ -118,6 +129,7 @@ public class Ship
         {
             throw new NoCargoException("NO CONTAINER LIKE THAT.");
         }
+        Console.WriteLine("SWAPPED." + "\n");
     }
 
     public void GetContainerInfo(Container container)
@@ -128,16 +140,18 @@ public class Ship
         Console.WriteLine("HEIGHT: " + container.height);
         Console.WriteLine("CARGO WEIGHT: " + container.cargoWeight);
         Console.WriteLine("DEPTH: " + container.deep);
-        Console.WriteLine("MAXIMUM LOAD: " + container.maxLoad);
+        Console.WriteLine("MAXIMUM LOAD: " + container.maxLoad + "\n");
     }
 
-    public void GetShipInfo (Ship ship)
+    public void GetShipInfo ()
     {
         Console.WriteLine("SHIP INFO:");
+        Console.WriteLine("NUMBER: " + num);
         Console.WriteLine("AVAILABLE CARGO:");
         foreach (Container container in containerList)
         {
             Console.WriteLine(container.serial);
         }
+        Console.WriteLine("\n");
     }
 }

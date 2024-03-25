@@ -17,10 +17,11 @@ public abstract class Container : IContainer
     {
         if (this.cargoWeight + cargoW > maxLoad)
         {
-            throw new OverfillException("Cargo weight exceeds container's maximum load capacity.");
+            throw new OverfillException("EXCEEDS MAX LOAD.");
         }
         this.cargoWeight += (int)cargoW;
-        Console.WriteLine("LOADED: " + cargoW + " kg");
+        Console.WriteLine("LOADED: " + serial + " WITH " + cargoW + " kg");
+        Console.WriteLine("CURRENT LOAD: " + cargoW + " kg");
     }
 
     public virtual void Unload()
@@ -36,5 +37,6 @@ public abstract class Container : IContainer
         this.cargoWeight = cargoWeight;
         this.deep = deep;
         this.maxLoad = maxLoad;
+        
     }
 }

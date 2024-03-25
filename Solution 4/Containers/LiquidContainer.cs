@@ -13,33 +13,33 @@ public class LiquidContainer : Container
         num++;
         serial = "KON-L-" + num;
         maxLoadPrimary = maxLoad;
+        Console.WriteLine("CREATED NEW CONTAINER: " + serial);
     }
 
     public override void Load(double cargoW, Product product)
     {
-        if (cargoWeight + cargoW > maxLoad)
-        {
-            throw new OverfillException("Cargo weight exceeds container's maximum load capacity. DANGEROUS!!111");
-        }
+        
 
         if (product is LiquidProduct liquidProduct)
         {
             if (liquidProduct.IsHazardous)
             {
                 maxLoad /= 2;
-                base.Load(cargoW, product);
-                
             }
             else
             {
                 maxLoad *= 0.9;
-                base.Load(cargoW, product);
-                
             }
+            if (cargoWeight + cargoW > maxLoad)
+            {
+                throw new OverfillException("EXCEEDS MAX LOAD. DANGEROUS!!111");
+            }
+            base.Load(cargoW, product);
+            
         }
         else
         {
-            throw new WrongTypeException("This type of product can't be inserted into the container.");
+            throw new WrongTypeException("CAN'T INSERT THIS CONTAINER HERE");
         }
     }
 

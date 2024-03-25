@@ -13,18 +13,19 @@ public class GasContainer : Container, IHazardNotifier
     {
         num++;
         serial = "KON-G-" + num;
+        Console.WriteLine("CREATED NEW CONTAINER: " + serial);
     }
 
     public override void Load(double cargoW, Product product)
     {
         if (cargoWeight + cargoW > maxLoad)
         {
-            throw new OverfillException("Cargo weight exceeds container's maximum load capacity.");
+            throw new OverfillException("EXCEEDS MAX LOAD.");
         }
 
         if (product is not GasProduct)
         {
-            throw new WrongTypeException("This type of product can't be inserted into the container.");
+            throw new WrongTypeException("CAN'T INSERT THIS CONTAINER HERE");
         }
         else
         {

@@ -16,13 +16,14 @@ public class RefrigeratedContainer : Container, IHazardNotifier
         serial = "KON-R-" + num;
         this.type = type;
         this.temperature = temperature;
+        Console.WriteLine("CREATED NEW CONTAINER: " + serial);
     }
 
     public override void Load(double cargoW, Product product)
     {
         if (cargoWeight + cargoW > maxLoad)
         {
-            throw new OverfillException("Cargo weight exceeds container's maximum load capacity.");
+            throw new OverfillException("EXCEEDS MAX LOAD. DANGEROUS!!!");
         }
 
         if (product is RefrigeratedProduct refrigeratedProduct && refrigeratedProduct.MinTemperature >= temperature &&
@@ -32,12 +33,12 @@ public class RefrigeratedContainer : Container, IHazardNotifier
         }
         else
         {
-            throw new WrongTypeException("This type of product can't be inserted into the container.");
+            throw new WrongTypeException("CAN'T INSERT THIS CONTAINER HERE");
         }
     }
 
     public void Notify(string serial)
     {
-        Console.WriteLine("Hazardous situation detected in container with serial number: " + serial);
+        Console.WriteLine("HAZARD HAZARD! " + serial);
     }
 }
