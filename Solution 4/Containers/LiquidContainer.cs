@@ -15,9 +15,9 @@ public class LiquidContainer : Container
         maxLoadPrimary = maxLoad;
     }
 
-    public override void Load(double cargoWeight, Product product)
+    public override void Load(double cargoW, Product product)
     {
-        if (cargoWeight > maxLoad)
+        if (cargoWeight + cargoW > maxLoad)
         {
             throw new OverfillException("Cargo weight exceeds container's maximum load capacity. DANGEROUS!!111");
         }
@@ -26,13 +26,15 @@ public class LiquidContainer : Container
         {
             if (liquidProduct.IsHazardous)
             {
-                base.Load(cargoWeight / 2, product);
                 maxLoad /= 2;
+                base.Load(cargoW, product);
+                
             }
             else
             {
-                base.Load(cargoWeight * 0.9, product);
                 maxLoad *= 0.9;
+                base.Load(cargoW, product);
+                
             }
         }
         else

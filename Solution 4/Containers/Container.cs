@@ -13,18 +13,20 @@ public abstract class Container : IContainer
     
     public String serial { get; set; }
 
-    public virtual void Load(double cargoWeight, Product product)
+    public virtual void Load(double cargoW, Product product)
     {
-        if (cargoWeight > maxLoad)
+        if (this.cargoWeight + cargoW > maxLoad)
         {
             throw new OverfillException("Cargo weight exceeds container's maximum load capacity.");
         }
-        this.cargoWeight += (int)cargoWeight;
+        this.cargoWeight += (int)cargoW;
+        Console.WriteLine("LOADED: " + cargoW + " kg");
     }
 
     public virtual void Unload()
     {
         cargoWeight = 0;
+        Console.WriteLine("UNLOADED CARGO");
     }
 
     public Container(int weight, int height, double cargoWeight, int deep, double maxLoad)

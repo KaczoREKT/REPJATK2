@@ -15,9 +15,9 @@ public class GasContainer : Container, IHazardNotifier
         serial = "KON-G-" + num;
     }
 
-    public override void Load(double cargoWeight, Product product)
+    public override void Load(double cargoW, Product product)
     {
-        if (cargoWeight > maxLoad)
+        if (cargoWeight + cargoW > maxLoad)
         {
             throw new OverfillException("Cargo weight exceeds container's maximum load capacity.");
         }
@@ -28,7 +28,7 @@ public class GasContainer : Container, IHazardNotifier
         }
         else
         {
-            base.Load(cargoWeight, product);
+            base.Load(cargoW, product);
         }
        
     }

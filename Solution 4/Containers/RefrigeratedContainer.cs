@@ -18,9 +18,9 @@ public class RefrigeratedContainer : Container, IHazardNotifier
         this.temperature = temperature;
     }
 
-    public override void Load(double cargoWeight, Product product)
+    public override void Load(double cargoW, Product product)
     {
-        if (cargoWeight > maxLoad)
+        if (cargoWeight + cargoW > maxLoad)
         {
             throw new OverfillException("Cargo weight exceeds container's maximum load capacity.");
         }

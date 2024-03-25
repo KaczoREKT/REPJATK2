@@ -13,9 +13,9 @@ class Program
         Console.WriteLine("Liquid Container created with serial number: " + gasContainer.serial);
         try
         {
-            liquidContainer.Load(400, new GasProduct("Mleko"));
             liquidContainer.Load(400, new LiquidProduct("Woda", false));
-            liquidContainer.Unload();
+            liquidContainer.Load(400, new LiquidProduct("Woda", false));
+            
         }
         catch (OverfillException ex)
         {
