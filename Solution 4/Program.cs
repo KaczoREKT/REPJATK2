@@ -1,20 +1,29 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using Solution_4.Exceptions;
+using Solution_4.Products;
 
-using Solution_4.Containers;
-using Solution_4.Exceptions;
-using Solution_4.Interfaces;
-
-
-class Program {
+class Program
+{
     static void Main(string[] args)
     {
-        // Example usage of the Con class
-        LiquidContainer container = new LiquidContainer(100, 50, 0, 30, 500);
-        Console.WriteLine("Container created with serial number: " + container.serial);
-        LiquidContainer container2 = new LiquidContainer(100, 50, 0, 30, 500);
-        Console.WriteLine("Container created with serial number: " + container2.serial);
-        
+        // Example usage of the LiquidContainer class
+        LiquidContainer liquidContainer = new LiquidContainer(100, 50, 0, 30, 500);
+        Console.WriteLine("Liquid Container created with serial number: " + liquidContainer.serial);
+        GasContainer gasContainer = new GasContainer(100, 50, 0, 30, 500);
+        Console.WriteLine("Liquid Container created with serial number: " + gasContainer.serial);
+        RefrigeratedContainer refrigeratedContainer = new RefrigeratedContainer(100, 50, 0, 30, 500, "Nabiał", -2);
+        Console.WriteLine("Liquid Container created with serial number: " + gasContainer.serial);
+        // Example usage of loading and unloading containers
+        try
+        {
+            liquidContainer.Load(400, new GasProduct("Mleko"));
+        }
+        catch (OverfillException ex)
+        {
+            Console.WriteLine("Error: " + ex.Message);
+        }
+
+        Console.WriteLine("Current cargo weight in Liquid Container: " + liquidContainer.cargoWeight);
+        liquidContainer.Unload();
+        Console.WriteLine("Cargo unloaded from Liquid Container. Current cargo weight: " + liquidContainer.cargoWeight);
     }
 }
-
-

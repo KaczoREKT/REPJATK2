@@ -1,25 +1,33 @@
+using System;
+using System.Collections.Generic;
 using Solution_4.Exceptions;
 using Solution_4.Interfaces;
 
 public abstract class Container : IContainer
 {
-    private int weight { get; set; }
-    private int height { get; set; }
-    public int cargoWeight { get; set; }
-    private int deep { get; set; }
-    private int maxLoad { get; set; }
+    protected int weight { get; set; }
+    protected int height { get; set; }
+    public double cargoWeight { get; protected set; }
+    protected int deep { get; set; }
+    protected double maxLoad { get; set; }
+    
+    public String serial { get; set; }
 
-    public virtual void Load(double cargoWeight)
+    public virtual void Load(double cargoWeight, Product product)
     {
-        throw new OverfillException();
+        if (cargoWeight > maxLoad)
+        {
+            throw new OverfillException("Cargo weight exceeds container's maximum load capacity.");
+        }
+        this.cargoWeight += (int)cargoWeight;
     }
 
     public virtual void Unload()
     {
-        throw new OverfillException();
+        cargoWeight = 0;
     }
 
-    public Container(int weight, int height, int cargoWeight, int deep, int maxLoad)
+    public Container(int weight, int height, double cargoWeight, int deep, double maxLoad)
     {
         this.weight = weight;
         this.height = height;
