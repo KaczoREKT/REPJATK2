@@ -81,23 +81,63 @@ public class Ship
         }
     }
 
-    public void swapCargo(Ship ship1, Ship ship2, String serial1, String serial2)
+    public void swapCargo(Ship ship1, Ship ship2, string serial1, string serial2)
     {
-        List<Container> temp = new List<Container>();
-        foreach (Container container in containerList)
+        List<Container> tempContainersShip1 = new List<Container>();
+        List<Container> tempContainersShip2 = new List<Container>();
+        
+        foreach (Container container in ship1.containerList)
         {
             if (container.serial == serial1 || container.serial == serial2)
             {
-                temp.Add(container);
+                tempContainersShip1.Add(container);
             }
         }
-        if (temp.Count() == 2)
+        
+        foreach (Container container in ship2.containerList)
         {
-                
+            if (container.serial == serial1 || container.serial == serial2)
+            {
+                tempContainersShip2.Add(container);
+            }
+        }
+        
+        if (tempContainersShip1.Count == 1 && tempContainersShip2.Count == 1)
+        {
+            Container tempContainer = tempContainersShip1[0];
+            tempContainersShip1[0] = tempContainersShip2[0];
+            tempContainersShip2[0] = tempContainer;
+            
+            ship1.containerList.Remove(tempContainersShip1[0]);
+            ship1.containerList.Add(tempContainersShip2[0]);
+
+            ship2.containerList.Remove(tempContainersShip2[0]);
+            ship2.containerList.Add(tempContainersShip1[0]);
         }
         else
         {
-            throw new NoCargoException("THIS CARGO DOES NOT EXIST");
+            throw new NoCargoException("NO CONTAINER LIKE THAT.");
+        }
+    }
+
+    public void GetContainerInfo(Container container)
+    {
+        Console.WriteLine("CONTAINER INFO:");
+        Console.WriteLine("SERIAL: " + container.serial);
+        Console.WriteLine("WEIGHT: " + container.weight);
+        Console.WriteLine("HEIGHT: " + container.height);
+        Console.WriteLine("CARGO WEIGHT: " + container.cargoWeight);
+        Console.WriteLine("DEPTH: " + container.deep);
+        Console.WriteLine("MAXIMUM LOAD: " + container.maxLoad);
+    }
+
+    public void GetShipInfo (Ship ship)
+    {
+        Console.WriteLine("SHIP INFO:");
+        Console.WriteLine("AVAILABLE CARGO:");
+        foreach (Container container in containerList)
+        {
+            Console.WriteLine(container.serial);
         }
     }
 }

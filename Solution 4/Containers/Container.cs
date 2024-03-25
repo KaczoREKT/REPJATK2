@@ -5,11 +5,11 @@ using Solution_4.Interfaces;
 
 public abstract class Container : IContainer
 {
-    protected int weight { get; set; }
-    protected int height { get; set; }
+    public int weight { get; set; }
+    public int height { get; set; }
     public double cargoWeight { get; protected set; }
-    protected int deep { get; set; }
-    protected double maxLoad { get; set; }
+    public int deep { get; set; }
+    public double maxLoad { get; set; }
     
     public String serial { get; set; }
 
